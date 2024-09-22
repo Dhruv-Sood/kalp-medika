@@ -154,7 +154,7 @@ export function MedicineDashboardJsx() {
   };
 
   return (
-    <div className="container mx-auto p-6 relative my-8">
+    <div className="container mx-auto p-6 relative my-8 w-full">
       <div className='flex justify-start'>
         <HyperText className="text-4xl md:text-5xl font-bold text-center mb-12" text={"Medicine Supplies Dashboard"} />
       </div>

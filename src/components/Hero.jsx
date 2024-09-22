@@ -41,7 +41,7 @@ const Hero = () => {
                             className="dark:block"
                             animationStyle="from-center"
                             videoSrc="https://www.youtube.com/embed/zjqWawzmN4Y"
-                            thumbnailSrc="/images/stl.png"
+                            thumbnailSrc="/images/thumbnail.png"
                             thumbnailAlt="Hero Video"
                         />
                     </div>
