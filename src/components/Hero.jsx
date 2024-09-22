@@ -40,7 +40,7 @@ const Hero = () => {
                         <HeroVideoDialog
                             className="dark:block"
                             animationStyle="from-center"
-                            videoSrc="https://www.youtube.com/embed/zjqWawzmN4Y"
+                            videoSrc="https://www.youtube.com/embed/yW51M42ntvU"
                             thumbnailSrc="/images/thumbnail.png"
                             thumbnailAlt="Hero Video"
                         />
