@@ -18,9 +18,9 @@ const Hero = () => {
                             gradientColor={"white"}
                         >
                             <div className="flex flex-col gap-8 p-4">
-                                <HyperText className="text-5xl font-bold text-center" text={"Pharma-Tracker"} />
+                                <HyperText className="text-xl md:text-5xl font-bold text-center" text={"Pharma-Tracker"} />
                                 <BoxReveal boxColor={"#5046e6"} duration={0.5}>
-                                    <p className="p-4 text-2xl md:text-3xl tracking-wide text-center">
+                                    <p className="p-1 md:p-4 text-lg md:text-3xl md:tracking-wide text-center">
                                         Your comprehensive solution for tracking pharmaceutical supply chains.
                                         Monitor inventory, shipments, and delivery statuses in real time.
                                     </p>

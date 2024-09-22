@@ -8,7 +8,7 @@ const Footer = () => {
 
         {/* Branding Section */}
         <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
-          <HyperText className="text-3xl font-bold" text={"Pharma-Tracker"} />
+          <HyperText className="text-3xl font-bold" text={"Kalp-Medika"} />
           <p className="text-sm text-gray-400 max-w-sm">
             Your one-stop solution for pharmaceutical supply chain tracking.
             Ensuring transparency and efficiency every step of the way.
@@ -30,13 +30,13 @@ const Footer = () => {
         <div className="flex-1 flex flex-col items-center lg:items-end space-y-4 text-center lg:text-right">
           <HyperText className="text-2xl font-bold" text={"Follow Us"} />
           <div className="flex space-x-6 text-gray-400">
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition duration-300">
+            <a href="https://x.com/dhruv_sood_" target="_blank" rel="noopener noreferrer" className="hover:text-white transition duration-300">
               <FaTwitter size={24} />
             </a>
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition duration-300">
               <FaLinkedin size={24} />
             </a>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition duration-300">
+            <a href="https://github.com/Dhruv-Sood/kalp-medika" target="_blank" rel="noopener noreferrer" className="hover:text-white transition duration-300">
               <FaGithub size={24} />
             </a>
           </div>
@@ -48,7 +48,7 @@ const Footer = () => {
 
       {/* Copyright Section */}
       <div className="container mx-auto text-center py-4 text-sm text-gray-400">
-        © {new Date().getFullYear()} Pharma-Tracker. All Rights Reserved.
+        © {new Date().getFullYear()} Kalp-Medika. All Rights Reserved.
       </div>
     </footer>
   );

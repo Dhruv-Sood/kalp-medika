@@ -5,9 +5,12 @@ const Navbar = () => {
     return (
         <nav className="flex justify-between items-center p-4 ">
             <div className="logo font-bold text-xl">
-                <HyperText text={"Kalp-Medika"}/>
+                <Link href="/">
+                    <HyperText text={"Kalp-Medika"} className={"hover:cursor-pointer"}/>
+                </Link>
+
             </div>
-            <ul className="list-items flex gap-4 items-center">
+            <ul className="list-items flex gap-4 items-center hidden md:flex">
                 <Link href="/">
                     <HyperText className={"text-xl hover:cursor-pointer"} text={"Home"} />
                 </Link>
@@ -23,9 +26,9 @@ const Navbar = () => {
                 <HyperText className={"text-xl hover:cursor-pointer"} text={"About"} />
 
             </ul>
-            <div>
+            <a href="https://github.com/Dhruv-Sood/kalp-medika" target="_blank" className="cursor:hover">
                 <FaGithub size={24} />
-            </div>
+            </a>
         </nav>
     );
 }
