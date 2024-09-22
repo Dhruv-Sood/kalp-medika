@@ -53,7 +53,7 @@ export function MedicineDashboardJsx() {
     await Promise.all(updatedMedicines.map(async (medicine, index) => {
       try {
         const response = await axios.post(
-          'https://gateway-api.kalp.studio/v1/contract/kalp/query/tzju9P38ZWM95eG02L8fg6wRbU9LSYIf1726930764602/ClientAccountBalance',
+          'https://gateway-api.kalp.studio/v1/contract/kalp/query/yvZCOXuc2Zlpz3KQn8KLb6101k5K3Dco1727003890680/ClientAccountBalance',
           {
             network: "TESTNET",
             blockchain: "KALP",
@@ -91,7 +91,7 @@ export function MedicineDashboardJsx() {
     setLoadingState((prevState) => ({ ...prevState, [id]: 'minting' })); // Set loading state for this ID
     try {
       const response = await axios.post(
-        'https://gateway-api.kalp.studio/v1/contract/kalp/invoke/tzju9P38ZWM95eG02L8fg6wRbU9LSYIf1726930764602/Mint',
+        'https://gateway-api.kalp.studio/v1/contract/kalp/invoke/yvZCOXuc2Zlpz3KQn8KLb6101k5K3Dco1727003890680/Mint',
         {
           network: "TESTNET",
           blockchain: "KALP",
@@ -124,7 +124,7 @@ export function MedicineDashboardJsx() {
     setLoadingState((prevState) => ({ ...prevState, [id]: 'burning' })); // Set loading state for this ID
     try {
       const response = await axios.post(
-        'https://gateway-api.kalp.studio/v1/contract/kalp/invoke/tzju9P38ZWM95eG02L8fg6wRbU9LSYIf1726930764602/Burn',
+        'https://gateway-api.kalp.studio/v1/contract/kalp/invoke/yvZCOXuc2Zlpz3KQn8KLb6101k5K3Dco1727003890680/Burn',
         {
           network: "TESTNET",
           blockchain: "KALP",
