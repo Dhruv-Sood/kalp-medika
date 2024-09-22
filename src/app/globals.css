@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fascinate+Inline&family=Inconsolata:wght@200..900&display=swap');
 
 @layer base {
   :root {
@@ -69,5 +71,15 @@
     @apply bg-background text-foreground;
     background: black;
     color: white;
+  }
+  .custom-font{
+    font-family: "Inconsolata", monospace;
+
+  font-weight: 200;
+
+  }
+  .logo-font{
+font-family: "Fascinate Inline", system-ui;
+  font-weight: 400;
   }
 }

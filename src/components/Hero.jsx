@@ -5,6 +5,7 @@ import HeroVideoDialog from "./magicui/hero-video-dialog"
 import { Button } from "@/components/ui/button"
 import BoxReveal from "./magicui/box-reveal"
 import Marquee from "./Marquee";
+import Link from "next/link"
 
 const Hero = () => {
     return (
@@ -26,9 +27,11 @@ const Hero = () => {
                                 </BoxReveal>
 
                                 <div className="w-full flex justify-center">
+                                    <Link href="/dashboard">
                                     <Button variant={"secondary"} className="w-40">
                                         Get Started
                                     </Button>
+                                    </Link>
                                 </div>
                             </div>
                         </MagicCard>
@@ -47,7 +50,9 @@ const Hero = () => {
 
             <section id="services" className="mt-5 space-y-8">
                 <div className="flex flex-col gap-4">
-                    <HyperText className="text-4xl md:text-5xl font-bold text-center" text={"Services"} />
+                    <div className="flex">
+                        <HyperText className="text-4xl md:text-5xl font-bold text-center" text={"Services"} />
+                    </div>
                     <div className="flex flex-col md:flex-row gap-8">
                         <MagicCard className="bg-[#19191778] text-white border-0 h-full min-h-[228px]">
                             <div className="p-4">
@@ -82,7 +87,9 @@ const Hero = () => {
             </section>
 
             <section className="bg-black py-12">
-                <HyperText className="text-4xl md:text-5xl font-bold text-center text-white mb-8" text={"Testimonials"} />
+                <div className="flex">
+                    <HyperText className="text-4xl md:text-5xl font-bold text-center text-white mb-8" text={"Testimonials"} />
+                </div>
                 <Marquee />
             </section>
         </div>

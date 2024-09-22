@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Plus, Minus, Thermometer, Activity, Clock } from 'lucide-react'
@@ -47,6 +45,7 @@ const initialMedicines = [
 
 export function MedicineDashboardJsx() {
   const [medicines, setMedicines] = useState(initialMedicines)
+  const [loadingState, setLoadingState] = useState({}); // State to track loading
 
   const fetchMedicineQuantities = async () => {
     const updatedMedicines = [...medicines]; // Clone the current medicines
@@ -89,6 +88,7 @@ export function MedicineDashboardJsx() {
   }, []);
 
   const handleMint = async (id) => {
+    setLoadingState((prevState) => ({ ...prevState, [id]: 'minting' })); // Set loading state for this ID
     try {
       const response = await axios.post(
         'https://gateway-api.kalp.studio/v1/contract/kalp/invoke/tzju9P38ZWM95eG02L8fg6wRbU9LSYIf1726930764602/Mint',
@@ -104,7 +104,7 @@ export function MedicineDashboardJsx() {
         },
         {
           headers: {
-            'x-api-key': '6ba07d243d27e9734e9518ffe952a5356aab3b9400ebb432da2271fef8ee741525eb02d208780a6f8897a577038192c13ffa78d81cf46e442eec758d51c66134bb6003'
+            'x-api-key': process.env.NEXT_PUBLIC_X_API_KEY
           }
         }
       );
@@ -115,52 +115,97 @@ export function MedicineDashboardJsx() {
     } catch (error) {
       console.error(`Error minting for medicine ID ${id}:`, error);
       alert(`Minting failed for medicine ID: ${id}. Please try again.`);
+    } finally {
+      setLoadingState((prevState) => ({ ...prevState, [id]: null })); // Reset loading state for this ID
     }
   };
 
-  const handleBurn = (id) => {
-    // Implement burn logic
-  }
+  const handleBurn = async (id) => {
+    setLoadingState((prevState) => ({ ...prevState, [id]: 'burning' })); // Set loading state for this ID
+    try {
+      const response = await axios.post(
+        'https://gateway-api.kalp.studio/v1/contract/kalp/invoke/tzju9P38ZWM95eG02L8fg6wRbU9LSYIf1726930764602/Burn',
+        {
+          network: "TESTNET",
+          blockchain: "KALP",
+          walletAddress: "9f487977475be2bfc7125b1b50d6a42325196007",
+          args: {
+            account: "9f487977475be2bfc7125b1b50d6a42325196007",
+            id: id,
+            amount: 1 // Burning 1 unit
+          }
+        },
+        {
+          headers: {
+            'x-api-key': process.env.NEXT_PUBLIC_X_API_KEY
+          }
+        }
+      );
+
+      console.log('Burn response:', response.data);
+      alert(`Burn successful for medicine ID: ${id}`);
+      fetchMedicineQuantities(); // Re-fetch quantities after burning
+    } catch (error) {
+      console.error(`Error burning for medicine ID ${id}:`, error);
+      alert(`Burning failed for medicine ID: ${id}. Please try again.`);
+    } finally {
+      setLoadingState((prevState) => ({ ...prevState, [id]: null })); // Reset loading state for this ID
+    }
+  };
 
   return (
-    <div className="container mx-auto p-4 relative my-8">
-      <HyperText className="text-4xl md:text-5xl font-bold text-center" text={"Medicine Supplies Dashboard"} />
-      <BlurFade delay={0.25} inView>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 z-50">
-        {medicines.map(medicine => (
-          <Card key={medicine.id}>
-            <CardHeader>
-              <CardTitle>{medicine.name}</CardTitle>
-              <CardDescription>Current Stock: <NumberTicker value={medicine.quantity} /></CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                <div className="flex items-center">
-                  <Thermometer className="mr-2 h-4 w-4" />
-                  <span>Ideal Temp: {medicine.idealTemp}</span>
-                </div>
-                <div className="flex items-center">
-                  <Clock className="mr-2 h-4 w-4" />
-                  <span>Shelf Life: {medicine.shelfLife}</span>
-                </div>
-                <div className="flex items-center">
-                  <Activity className="mr-2 h-4 w-4" />
-                  <span>Dosage: {medicine.dosage}</span>
-                </div>
-              </div>
-            </CardContent>
-            <CardFooter className="flex justify-between">
-              <Button variant="outline" size="sm" onClick={() => handleBurn(medicine.id)}>
-                <Minus className="mr-2 h-4 w-4" /> Burn
-              </Button>
-              <Button variant="outline" size="sm" onClick={() => handleMint(medicine.id)}>
-                <Plus className="mr-2 h-4 w-4" /> Mint
-              </Button>
-            </CardFooter>
-          </Card>
-        ))}
+    <div className="container mx-auto p-6 relative my-8">
+      <div className='flex justify-start'>
+        <HyperText className="text-4xl md:text-5xl font-bold text-center mb-12" text={"Medicine Supplies Dashboard"} />
       </div>
+      <BlurFade delay={0.25} inView>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 z-50">
+          {medicines.map(medicine => (
+            <Card key={medicine.id} className="shadow-lg rounded-md border border-gray-200">
+              <CardHeader>
+                <CardTitle className="text-lg font-semibold">{medicine.name}</CardTitle>
+                <CardDescription className="text-sm text-gray-600">
+                  Current Stock: <NumberTicker value={medicine.quantity} />
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <Thermometer className="mr-2 h-5 w-5 text-blue-500" />
+                    <span className="text-sm">Ideal Temp: {medicine.idealTemp}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Clock className="mr-2 h-5 w-5 text-yellow-500" />
+                    <span className="text-sm">Shelf Life: {medicine.shelfLife}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Activity className="mr-2 h-5 w-5 text-green-500" />
+                    <span className="text-sm">Dosage: {medicine.dosage}</span>
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter className="flex justify-between">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => handleBurn(medicine.id)}
+                  disabled={loadingState[medicine.id] === 'burning'}
+                >
+                  {loadingState[medicine.id] === 'burning' ? "Loading..." : <><Minus className="mr-2 h-4 w-4" /> Burn</>}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => handleMint(medicine.id)}
+                  disabled={loadingState[medicine.id] === 'minting'}
+                >
+                  {loadingState[medicine.id] === 'minting' ? "Loading..." : <><Plus className="mr-2 h-4 w-4" /> Mint</>}
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
       </BlurFade>
     </div>
-  );
+  )
 }

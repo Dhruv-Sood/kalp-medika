@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="w-full">
       {/* <Meteors /> */}
-      <Navbar />
+      {/* <Navbar /> */}
       <Hero />
       <Footer />
     </div>
